@@ -12,12 +12,21 @@
   cursor: pointer;
   align-items: center;
 
-  &:hover {
+  &:hover,
+  &:focus-visible {
+    .burgerText {
+      color: var(--color-accent);
+    }
+
     .burgerIcon {
+      background-color: var(--color-accent);
+
       &:before {
+        background-color: var(--color-accent);
         transform: translate3d(0, -2px, 0);
       }
       &:after {
+        background-color: var(--color-accent);
         transform: translate3d(0, 2px, 0);
       }
     }
@@ -31,6 +40,7 @@
   background-color: var(--color-accent);
   position: relative;
   transform: translateZ(0);
+  transition: background-color 0.3s ease;
   will-change: transform;
 
   @include respond-to(desktop-lg) {
@@ -52,7 +62,9 @@
     display: flex;
     top: -6px;
     transform: translate3d(0, 0, 0);
-    transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+    transition:
+      background-color 0.3s ease,
+      transform 0.35s cubic-bezier(0.25, 1, 0.5, 1);
     will-change: transform;
 
     @include respond-to(mobile) {
@@ -70,7 +82,9 @@
     display: flex;
     top: 6px;
     transform: translate3d(0, 0, 0);
-    transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+    transition:
+      background-color 0.3s ease,
+      transform 0.35s cubic-bezier(0.25, 1, 0.5, 1);
     will-change: transform;
 
     @include respond-to(mobile) {
@@ -86,6 +100,7 @@
   font-weight: 600;
   line-height: 1;
   letter-spacing: 0.07em;
+  transition: color 0.3s ease;
 
   @include respond-to(desktop-lg) {
     font-size: 15px;

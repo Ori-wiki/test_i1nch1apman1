@@ -33,7 +33,8 @@ export const ContactForm = () => {
     formState: { errors, isSubmitting },
   } = useForm<FormValues>({
     resolver: zodResolver(schema),
-    mode: 'onTouched',
+    mode: 'onSubmit',
+    reValidateMode: 'onChange',
     defaultValues: { name: '', phone: '', email: '' },
   })
 

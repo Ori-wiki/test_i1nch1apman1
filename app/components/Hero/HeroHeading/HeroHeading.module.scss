@@ -20,7 +20,7 @@
   @include respond-to(tablet) {
     flex-direction: column;
     align-items: flex-start;
-    margin-top: 40px;
+    margin-top: 24px;
   }
 
   @include respond-to(mobile) {
@@ -56,7 +56,8 @@
     top: 0;
     margin-left: 0;
     transform: none;
-    font-size: 26px;
+    font-size: 24px;
+    line-height: 1.35;
   }
 
   @include respond-to(mobile) {
@@ -85,16 +86,17 @@
   @include respond-to(tablet) {
     container-type: inline-size;
     width: 100%;
-    height: 116px;
-    margin-top: 42px;
+    height: 120px;
+    margin-top: 18px;
     transform: none;
+    overflow: visible;
   }
 
   @include respond-to(mobile) {
     container-type: inline-size;
     width: 100%;
     max-width: 100%;
-    height: 64px;
+    height: max(64px, 20cqw);
     margin-top: 21px;
     overflow: visible;
   }
@@ -119,7 +121,7 @@
   }
 
   @include respond-to(tablet) {
-    font-size: 22cqw;
+    font-size: 17cqw;
     line-height: 0.75;
     white-space: nowrap;
   }

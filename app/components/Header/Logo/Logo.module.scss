@@ -1,15 +1,17 @@
 @use '@/app/mixins.scss' as *;
 
 .logo {
+  display: block;
   min-width: 150px;
+  line-height: 0;
   opacity: 1;
+  overflow: hidden;
   transform: scale(1);
   transition: 0.6s all;
   margin: 0px 25px;
 
   &:hover {
     opacity: 0.8;
-    transform: scale(1.05);
   }
 
   @include respond-to(desktop-lg) {
@@ -23,6 +25,8 @@
   }
 
   img {
+    display: block;
     width: 100%;
+    height: auto;
   }
 }

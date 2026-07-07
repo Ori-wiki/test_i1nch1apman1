@@ -33,21 +33,16 @@
 
   .imageTitle {
     color: var(--color-text-accent);
-    font-size: 13px;
+    font-size: 17px;
+    font-weight: 400;
+    line-height: 1.4;
+    text-transform: uppercase;
 
-    @include respond-to(desktop-lg) {
-      font-size: 17px;
+    @media (max-width: 1439px) {
+      font-size: 13px;
     }
 
-    @include respond-to(tablet) {
-      font-size: 11px;
-    }
-
-    @include respond-to(laptop) {
-      font-size: 11px;
-    }
-
-    @include respond-to(mobile) {
+    @media (max-width: 1024px) {
       font-size: 11px;
     }
   }

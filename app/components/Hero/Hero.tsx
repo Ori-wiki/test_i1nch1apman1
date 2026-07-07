@@ -8,7 +8,7 @@ export const Hero = () => {
       <div className={styles.container}>
         <HeroImage
           src='/images/hero-bg.jpg'
-          alt='Дом бизнес-класса INCHAPIN_test'
+          alt='Дом бизнес-класса INCHAPIN'
         />
         <HeroHeading
           subtitle={
@@ -18,7 +18,7 @@ export const Hero = () => {
               для ценителей роскоши
             </>
           }
-          title='INCHAPIN_test'
+          title='INCHAPIN'
         />
       </div>
     </section>

@@ -77,7 +77,12 @@ export const FloatingInput = <T extends FieldValues>({
           )
         }}
       />
-      {error && <span className={styles.errorMessage}>{error.message}</span>}
+      <span
+        className={`${styles.errorMessage} ${error ? styles.visible : ''}`}
+        aria-live='polite'
+      >
+        {error?.message}
+      </span>
     </div>
   )
 }

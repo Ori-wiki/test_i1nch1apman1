@@ -28,6 +28,14 @@
     transform: translateY(-100%);
   }
 
+  &:hover {
+    --select-arrow-y: 2px;
+  }
+
+  &.active:hover {
+    --select-arrow-y: -2px;
+  }
+
   @include respond-to(mobile) {
     display: none;
   }

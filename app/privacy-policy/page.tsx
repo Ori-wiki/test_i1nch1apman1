@@ -1,7 +1,7 @@
 import styles from './PrivacyPolicy.module.scss'
 
 export const metadata = {
-  title: 'Политика обработки персональных данных | INCHAPIN_test',
+  title: 'Политика обработки персональных данных | INCHAPIN',
 }
 
 export default function PrivacyPolicyPage() {

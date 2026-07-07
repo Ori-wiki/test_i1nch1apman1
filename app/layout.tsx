@@ -51,7 +51,7 @@ const proximaNova = localFont({
 })
 
 export const metadata: Metadata = {
-  title: 'INCHAPIN_test | Дом бизнес-класса',
+  title: 'INCHAPIN | Дом бизнес-класса',
   description: 'Демо-страница жилого комплекса',
   icons: {
     icon: '/blue-favicon.ico',

@@ -56,11 +56,44 @@ export const ApartmentSelect = ({ options }: ApartmentSelectProps) => {
       fontWeight: 600,
     }),
     indicatorSeparator: () => ({ display: 'none' }),
-    dropdownIndicator: (provided) => ({
+    dropdownIndicator: (provided, state) => ({
       ...provided,
       color: '#ffffff',
       fontSize: '14px',
+      transform: `translateY(var(--select-arrow-y, 0)) ${
+        state.selectProps.menuIsOpen ? 'rotate(180deg)' : 'rotate(0deg)'
+      }`,
+      transition: 'transform 0.35s ease, color 0.3s ease',
       '&:hover': { color: '#ffffff' },
+    }),
+    menu: (provided) => ({
+      ...provided,
+      marginTop: '8px',
+      padding: '6px',
+      backgroundColor: '#ffffff',
+      borderRadius: '12px',
+      border: '1px solid rgba(0, 123, 255, 0.16)',
+      boxShadow: '0 14px 32px rgba(0, 44, 94, 0.14)',
+      overflow: 'hidden',
+    }),
+    menuList: (provided) => ({
+      ...provided,
+      padding: 0,
+    }),
+    option: (provided, state) => ({
+      ...provided,
+      padding: '10px 12px',
+      color: state.isFocused ? 'var(--color-accent)' : 'var(--color-text-main)',
+      backgroundColor: state.isFocused ? 'rgba(0, 123, 255, 0.08)' : '#ffffff',
+      borderRadius: '8px',
+      cursor: 'pointer',
+      fontSize: 'var(--select-font-size)',
+      fontWeight: 600,
+      lineHeight: 1.2,
+      transition: 'background-color 0.2s ease, color 0.2s ease',
+      ':active': {
+        backgroundColor: 'rgba(0, 123, 255, 0.14)',
+      },
     }),
   }
 

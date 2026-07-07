@@ -7,7 +7,7 @@ export const Logo = () => (
     <Image
       src='/logos/logo.svg'
       alt='Inchapin'
-      width={150}
+      width={187}
       height={30}
       priority
     />
