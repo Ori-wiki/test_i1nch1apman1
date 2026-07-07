@@ -1,0 +1,28 @@
+.viewport {
+  width: 100%;
+  position: static;
+  height: auto;
+  min-height: 100%;
+  overflow: visible;
+  scrollbar-width: none;
+
+  @media (min-width: 768px) {
+    position: fixed;
+    inset: 0;
+    height: 100vh;
+    height: 100dvh;
+    overflow: hidden;
+  }
+
+  :global(.scrollbar-track.scrollbar-track-y) {
+    z-index: 1000;
+  }
+}
+
+.nativeViewport {
+  position: static;
+  width: 100%;
+  height: auto;
+  min-height: 100%;
+  overflow: visible;
+}

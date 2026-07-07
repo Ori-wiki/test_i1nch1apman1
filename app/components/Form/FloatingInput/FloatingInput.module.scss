@@ -1,0 +1,88 @@
+@use '@/app/mixins.scss' as *;
+
+.wrapper {
+  position: relative;
+  margin-bottom: 25px;
+  padding-top: 10px;
+  width: 100%;
+
+  @include respond-to(mobile) {
+    margin-bottom: 14px;
+  }
+
+  span {
+    color: red;
+    font-size: 12px;
+  }
+}
+
+.label {
+  text-transform: uppercase;
+  color: var(--color-text-main);
+  pointer-events: none;
+  opacity: 1;
+  position: absolute;
+  top: 22px;
+  left: -2px;
+  padding: 0px 4px;
+  transition: 0.3s all;
+  font-size: 16px;
+
+  @include respond-to(desktop-lg) {
+    font-size: 17px;
+  }
+
+  @include respond-to(laptop) {
+    font-size: 14px;
+  }
+
+  @include respond-to(mobile) {
+    font-size: 11px;
+  }
+}
+
+.input {
+  border: none;
+  border-bottom: 2px solid #cccccc;
+  width: 100%;
+  padding: 12px 0px;
+  font-size: 16px;
+
+  @include respond-to(desktop-lg) {
+    font-size: 17px;
+  }
+
+  @include respond-to(laptop) {
+    font-size: 14px;
+  }
+
+  @include respond-to(mobile) {
+    font-size: 11px;
+  }
+
+  &:focus {
+    outline: none;
+    border-color: #000;
+  }
+}
+
+.label.active {
+  top: -4px;
+  font-size: 12px;
+  opacity: 0.5;
+  @include respond-to(desktop-lg) {
+    font-size: 13px;
+  }
+
+  @include respond-to(laptop) {
+    font-size: 11px;
+  }
+
+  @include respond-to(mobile) {
+    font-size: 9px;
+  }
+}
+
+.error {
+  border-color: red;
+}

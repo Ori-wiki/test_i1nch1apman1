@@ -1,0 +1,121 @@
+@use '@/app/mixins.scss' as *;
+
+.header {
+  background-color: var(--color-bg);
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  height: 100px;
+  padding: 0 40px;
+  display: flex;
+  position: fixed;
+  z-index: 100;
+  width: 100%;
+  top: 0;
+  left: 50%;
+  max-width: 1922px;
+  transform: translate(-50%);
+
+  @include respond-to(desktop-lg) {
+    height: 131px;
+    padding: 0 80px;
+  }
+
+  @include respond-to(laptop) {
+    height: 103px;
+    padding: 0 30px;
+  }
+
+  @include respond-to(tablet) {
+    height: 123px;
+    padding: 0 40px;
+  }
+
+  @include respond-to(mobile) {
+    height: 81px;
+    padding: 0 20px;
+    background-color: #fff;
+  }
+}
+
+.leftGroup {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 40px;
+
+  @include respond-to(tablet) {
+    gap: 20px;
+  }
+
+  @include respond-to(mobile) {
+    width: 40px;
+    flex: 0 0 40px;
+    position: relative;
+    z-index: 2;
+  }
+}
+
+.rightGroup {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+
+  @include respond-to(mobile) {
+    width: 40px;
+    flex: 0 0 40px;
+    position: relative;
+    z-index: 2;
+  }
+}
+
+.tabletHeaderContacts,
+.tabletSelect {
+  display: none;
+}
+
+.desktopSelect,
+.desktopHeaderContacts {
+  display: block;
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .leftGroup {
+    width: auto;
+    flex: 0 0 auto;
+    gap: 62px;
+  }
+
+  .rightGroup {
+    width: auto;
+    flex: 0 0 auto;
+  }
+
+  .desktopSelect,
+  .desktopHeaderContacts {
+    display: none;
+  }
+
+  .tabletHeaderContacts {
+    display: block;
+  }
+
+  .tabletSelect {
+    display: block;
+    width: 188px;
+  }
+}
+
+@include respond-to(mobile) {
+  .desktopSelect,
+  .tabletHeaderContacts,
+  .tabletSelect {
+    display: none;
+  }
+
+  .desktopHeaderContacts {
+    display: block;
+  }
+}

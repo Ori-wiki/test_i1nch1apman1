@@ -1,0 +1,106 @@
+@use '@/app/mixins.scss' as *;
+
+.section {
+  position: relative;
+  z-index: 2;
+  height: 875px;
+  padding: 70px 40px 40px;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  background-color: var(--color-bg);
+
+  @include respond-to(desktop-lg) {
+    height: 1139px;
+    padding: 100px 80px 80px;
+  }
+
+  @include respond-to(laptop) {
+    height: 669px;
+    padding: 90px 104px 30px 30px;
+  }
+
+  @include respond-to(tablet) {
+    height: 523px;
+    padding: 40px 50px 40px 0;
+  }
+
+  @include respond-to(mobile) {
+    height: auto;
+    min-height: 0;
+    padding: 27px 20px calc(20px + env(safe-area-inset-bottom)) 0;
+    display: block;
+    overflow: visible;
+  }
+}
+
+.container {
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  max-width: 1920px;
+
+  @include respond-to(mobile) {
+    height: auto;
+    overflow: visible;
+  }
+}
+
+.content {
+  display: flex;
+  height: 100%;
+  min-width: 0;
+  flex-direction: row;
+  justify-content: flex-start;
+
+  @include respond-to(mobile) {
+    height: auto;
+    width: 100%;
+    flex-direction: column;
+    gap: 54px;
+    overflow: visible;
+  }
+}
+
+.rightColumn {
+  position: relative;
+  width: 33.38%;
+  min-width: 0;
+  height: 100%;
+  margin-left: 226px;
+  padding: 101px 0 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+
+  @include respond-to(desktop-lg) {
+    width: 33.35%;
+    margin-left: 293px;
+    padding-top: 125px;
+  }
+
+  @include respond-to(laptop) {
+    width: 37.53%;
+    margin-left: 148px;
+    padding-top: 57px;
+  }
+
+  @include respond-to(tablet) {
+    width: 46.52%;
+    margin-left: 94px;
+    padding-top: 56px;
+  }
+
+  @include respond-to(mobile) {
+    position: static;
+    width: 100%;
+    height: auto;
+    margin-left: 0;
+    padding: 0 0 0 20px;
+    overflow: visible;
+  }
+}
+
+.highlight {
+  color: var(--color-accent);
+}

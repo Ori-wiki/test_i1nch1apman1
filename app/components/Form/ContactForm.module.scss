@@ -1,0 +1,130 @@
+@use '@/app/mixins.scss' as *;
+
+.formContainer {
+  position: relative;
+  top: 3px;
+  flex-direction: column;
+  width: 100%;
+  max-width: 504px;
+  margin: 0 auto;
+  padding: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  padding: 25px;
+
+  @include respond-to(desktop-lg) {
+    top: -6px;
+    max-width: 637px;
+  }
+
+  @include respond-to(laptop) {
+    top: 2px;
+    max-width: 420px;
+  }
+
+  @include respond-to(tablet) {
+    top: 2px;
+    max-width: 488px;
+  }
+
+  @include respond-to(mobile) {
+    top: 5px;
+    max-width: 360px;
+    padding: 20px;
+    align-items: stretch;
+  }
+}
+
+.title {
+  text-transform: uppercase;
+  font-weight: 400;
+  font-size: 40px;
+  margin-bottom: 27px;
+  color: var(--color-text-main);
+  text-align: center;
+
+  @include respond-to(desktop-lg) {
+    font-size: 52px;
+    margin-bottom: 58px;
+  }
+
+  @include respond-to(laptop) {
+    font-size: 28px;
+    margin-bottom: 33px;
+  }
+
+  @include respond-to(tablet) {
+    font-size: 28px;
+    margin-bottom: 33px;
+  }
+
+  @include respond-to(mobile) {
+    font-size: 20px;
+    margin-bottom: 12px;
+    text-align: left;
+  }
+}
+
+.disclaimer {
+  color: var(--color-text-light);
+  font-size: 12px;
+  text-align: center;
+  margin: 25px 0;
+
+  @include respond-to(desktop-lg) {
+    font-size: 14px;
+  }
+
+  @include respond-to(laptop) {
+    font-size: 11px;
+  }
+
+  @include respond-to(mobile) {
+    font-size: 12px;
+  }
+
+  a {
+    color: var(--color-text-light);
+    transition: color 0.3s ease;
+
+    &:hover,
+    &:focus-visible {
+      color: var(--color-text-accent);
+    }
+
+    &:focus-visible {
+      outline: 1px solid currentColor;
+      outline-offset: 3px;
+    }
+  }
+}
+
+.successMessage {
+  text-align: center;
+
+  h2 {
+    margin: 0;
+    padding: 0;
+    line-height: 1.4;
+    margin-bottom: 10px;
+    color: var(--color-text-accent);
+    text-transform: uppercase;
+    text-align: center;
+    font-size: 40px;
+    font-weight: 400;
+
+    @include respond-to(desktop-lg) {
+      font-size: 52px;
+    }
+
+    @include respond-to(tablet) {
+      font-size: 28px;
+    }
+
+    @include respond-to(mobile) {
+      font-size: 20px;
+    }
+  }
+}

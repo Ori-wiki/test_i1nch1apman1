@@ -1,0 +1,111 @@
+@use '@/app/mixins.scss' as *;
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+  pointer-events: none;
+}
+
+.overlayEnter {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.overlayEnterActive,
+.overlayEnterDone {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.overlayExit {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.overlayExitActive {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.content {
+  background: var(--color-bg);
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.closeBtn {
+  background: none;
+  border: none;
+  outline: none;
+  width: 44px;
+  height: 44px;
+  position: absolute;
+  top: 60px;
+  right: 60px;
+  z-index: 20;
+  transition: 0.5s all;
+  transform: rotate(0deg);
+  cursor: pointer;
+  pointer-events: auto;
+  touch-action: manipulation;
+
+  @include respond-to(tablet) {
+    top: 50px;
+    right: 50px;
+  }
+
+  @include respond-to(mobile) {
+    top: 25px;
+    right: 25px;
+  }
+
+  &:hover {
+    transform: rotate(90deg);
+
+    &::after,
+    &::before {
+      background-color: var(--color-text-accent);
+    }
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--color-text-accent);
+    outline-offset: 8px;
+  }
+}
+
+.closeBtn:after {
+  content: '';
+  width: 30px;
+  height: 1px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%) rotate(-45deg);
+  background-color: var(--color-text-main);
+  transition: 0.5s all;
+}
+
+.closeBtn:before {
+  content: '';
+  width: 30px;
+  height: 1px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%) rotate(45deg);
+  background-color: var(--color-text-main);
+  transition: 0.5s all;
+}

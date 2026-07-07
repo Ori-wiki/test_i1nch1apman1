@@ -1,0 +1,53 @@
+@use './mixins.scss' as *;
+
+:root {
+  --color-accent: #2f80ed;
+  --color-accent-rgb: 47, 128, 237;
+  --color-bg: #fff;
+  --color-light: #d7d7d7;
+  --color-text-main: #000;
+  --color-text-accent: #2f80ed;
+  --color-text-light: #888888;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  overflow: hidden;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-proxima), sans-serif;
+  background-color: var(--color-bg);
+  color: var(--color-text-main);
+  -webkit-font-smoothing: antialiased;
+
+  @include respond-to(mobile) {
+    overflow-x: hidden;
+    overflow-y: auto;
+    height: auto;
+    min-height: 100%;
+  }
+}
+
+button,
+input,
+textarea,
+select {
+  font-family: inherit;
+}
+
+.scroll-content {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  min-height: 100dvh;
+  width: 100%;
+}

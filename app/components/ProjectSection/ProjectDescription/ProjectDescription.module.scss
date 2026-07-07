@@ -1,0 +1,94 @@
+@use '@/app/mixins.scss' as *;
+
+.blueLine {
+  width: 50px;
+  height: 10px;
+  margin-bottom: 50px;
+  border-radius: 2px;
+  background-color: var(--color-accent);
+
+  @include respond-to(desktop-lg) {
+    width: 60px;
+    margin-bottom: 75px;
+  }
+
+  @include respond-to(tablet) {
+    width: 35px;
+    height: 5px;
+    margin-bottom: 25px;
+  }
+
+  @include respond-to(mobile) {
+    width: 35px;
+    height: 5px;
+    margin-bottom: 25px;
+  }
+}
+
+.title {
+  margin: 0;
+  padding: 0;
+  color: var(--color-text-main);
+  font-size: 26px;
+  font-weight: 400;
+  line-height: 1.4;
+  text-transform: uppercase;
+
+  @include respond-to(desktop-lg) {
+    font-size: 34px;
+  }
+
+  @include respond-to(laptop) {
+    font-size: 19px;
+  }
+
+  @include respond-to(tablet) {
+    font-size: 19px;
+  }
+
+  @include respond-to(mobile) {
+    font-size: 16px;
+    line-height: 1.5;
+  }
+}
+
+.description {
+  margin: 98px 0 50px;
+  padding: 0;
+  color: var(--color-text-main);
+  font-size: 16px;
+  line-height: 1.6;
+  text-transform: uppercase;
+
+  @include respond-to(desktop-lg) {
+    margin-top: 122px;
+    margin-bottom: 100px;
+    font-size: 20px;
+  }
+
+  @include respond-to(laptop) {
+    margin-top: 67px;
+    font-size: 12px;
+    line-height: 1.8;
+  }
+
+  @include respond-to(tablet) {
+    margin-top: 22px;
+    font-size: 12px;
+    line-height: 1.8;
+  }
+
+  @include respond-to(mobile) {
+    margin-top: 40px;
+    margin-bottom: 0;
+    font-size: 11px;
+    line-height: 1.8;
+  }
+}
+
+.description sup {
+  position: relative;
+  top: -0.45em;
+  font-size: 0.58em;
+  line-height: 0;
+}

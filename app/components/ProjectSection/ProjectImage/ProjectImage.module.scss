@@ -1,0 +1,167 @@
+@use '@/app/mixins.scss' as *;
+
+.imageColumn {
+  width: 41.69%;
+  height: 100%;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 24px;
+
+  @include respond-to(desktop-lg) {
+    width: 41.65%;
+    gap: 32px;
+  }
+
+  @include respond-to(laptop) {
+    width: 45.84%;
+    gap: 15px;
+  }
+
+  @include respond-to(tablet) {
+    width: 40.39%;
+    gap: 15px;
+  }
+
+  @include respond-to(mobile) {
+    width: 100%;
+    height: 405px;
+    flex: 0 0 405px;
+    gap: 5px;
+  }
+
+  .imageTitle {
+    color: var(--color-text-accent);
+    font-size: 13px;
+
+    @include respond-to(desktop-lg) {
+      font-size: 17px;
+    }
+
+    @include respond-to(tablet) {
+      font-size: 11px;
+    }
+
+    @include respond-to(laptop) {
+      font-size: 11px;
+    }
+
+    @include respond-to(mobile) {
+      font-size: 11px;
+    }
+  }
+}
+
+.blueLogo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 200px;
+  height: 200px;
+  position: absolute;
+  right: -100px;
+  top: 88px;
+  background-color: var(--color-accent);
+  border: 0;
+  padding: 0;
+  z-index: 2;
+  border-radius: 100%;
+  transition: transform 0.4s ease-out;
+  will-change: transform;
+  cursor: pointer;
+
+  @include respond-to(desktop-lg) {
+    width: 259px;
+    height: 259px;
+    right: -129.5px;
+    top: 114px;
+  }
+
+  @include respond-to(laptop) {
+    width: 148px;
+    height: 148px;
+    right: -74px;
+    top: 61px;
+  }
+
+  @include respond-to(tablet) {
+    width: 81px;
+    height: 81px;
+    right: -40px;
+    top: 59px;
+  }
+
+  @include respond-to(mobile) {
+    width: 87px;
+    height: 87px;
+    right: -44px;
+    top: 61px;
+  }
+
+  .logoIcon {
+    width: 35%;
+    height: 35%;
+    object-fit: contain;
+    transition-delay: 0s;
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: transform;
+  }
+
+  &:hover {
+    transform: scale(1.05);
+
+    .logoIcon {
+      transition-delay: 0.2s;
+      transform: scale(1.1) rotateY(180deg);
+    }
+  }
+
+  &:focus-visible {
+    outline: 3px solid var(--color-text-main);
+    outline-offset: 5px;
+    transform: scale(1.05);
+  }
+}
+
+.mainImageWrapper {
+  position: relative;
+  width: 100%;
+  height: auto;
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: visible;
+
+  @include respond-to(mobile) {
+    width: calc(100% - 44px);
+    align-self: flex-start;
+    overflow: visible;
+  }
+}
+
+.mainImage {
+  object-fit: cover;
+}
+
+.blueLine {
+  width: 50px;
+  height: 10px;
+  background-color: var(--color-accent);
+  margin-bottom: 50px;
+  border-radius: 2px;
+
+  @include respond-to(desktop-lg) {
+    margin-bottom: 75px;
+    width: 60px;
+  }
+
+  @include respond-to(tablet) {
+    margin-bottom: 25px;
+    width: 35px;
+    height: 5px;
+  }
+}
+
+.highlight {
+  color: var(--color-accent);
+}

@@ -1,0 +1,174 @@
+@use '@/app/mixins.scss' as *;
+
+.content {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-end;
+  width: 100%;
+  flex-shrink: 0;
+  margin-top: 40px;
+
+  @include respond-to(desktop-lg) {
+    margin-top: 50px;
+  }
+
+  @include respond-to(laptop) {
+    margin-top: 30px;
+  }
+
+  @include respond-to(tablet) {
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: 40px;
+  }
+
+  @include respond-to(mobile) {
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: 20px;
+  }
+}
+
+.subtitle.subtitle {
+  position: relative;
+  top: 1px;
+  margin: 0;
+  padding: 0;
+  color: var(--color-text-accent);
+  font-size: 26px;
+  font-weight: 400;
+  line-height: 1.4;
+  text-transform: uppercase;
+
+  @include respond-to(desktop-lg) {
+    font-size: 31px;
+    transform: translateY(12px);
+  }
+
+  @include respond-to(laptop) {
+    top: 5px;
+    margin-left: 0;
+    transform: translateX(20px);
+  }
+
+  @include respond-to(tablet) {
+    top: 0;
+    margin-left: 0;
+    transform: none;
+    font-size: 26px;
+  }
+
+  @include respond-to(mobile) {
+    font-size: 13px;
+    line-height: 1.5;
+  }
+}
+
+.titleMask {
+  position: relative;
+  width: 717px;
+  height: 114px;
+  overflow: hidden;
+
+  @include respond-to(desktop-lg) {
+    width: 862px;
+    height: 137px;
+  }
+
+  @include respond-to(laptop) {
+    width: 554px;
+    height: 88px;
+    transform: none;
+  }
+
+  @include respond-to(tablet) {
+    container-type: inline-size;
+    width: 100%;
+    height: 116px;
+    margin-top: 42px;
+    transform: none;
+  }
+
+  @include respond-to(mobile) {
+    container-type: inline-size;
+    width: 100%;
+    max-width: 100%;
+    height: 64px;
+    margin-top: 21px;
+    overflow: visible;
+  }
+}
+
+.title {
+  margin: 0;
+  font-weight: 400;
+  font-size: 158px;
+  padding: 0;
+  line-height: 0.75;
+  color: var(--color-text-main);
+  position: relative;
+  display: block;
+  transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+
+  @include respond-to(desktop-lg) {
+    font-size: 190px;
+  }
+  @include respond-to(laptop) {
+    font-size: 122px;
+  }
+
+  @include respond-to(tablet) {
+    font-size: 22cqw;
+    line-height: 0.75;
+    white-space: nowrap;
+  }
+
+  @include respond-to(mobile) {
+    font-size: 22cqw;
+    left: 0;
+    white-space: nowrap;
+  }
+
+  &::before {
+    content: var(--title-text);
+    position: absolute;
+    left: 0;
+    top: 100%;
+    width: 100%;
+    color: var(--color-text-accent);
+    font-size: inherit;
+    font-weight: inherit;
+    line-height: inherit;
+  }
+
+  @include respond-to(tablet) {
+    &::before {
+      content: none;
+    }
+  }
+
+  @include respond-to(mobile) {
+    &::before {
+      content: none;
+    }
+  }
+}
+
+.titleMask.scrolled {
+  .title {
+    transform: translateY(-100%);
+  }
+
+  @include respond-to(tablet) {
+    .title {
+      transform: none;
+    }
+  }
+
+  @include respond-to(mobile) {
+    .title {
+      transform: none;
+    }
+  }
+}

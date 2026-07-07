@@ -1,0 +1,57 @@
+@use '@/app/mixins.scss' as *;
+
+.wrapper {
+  --select-font-size: 13px;
+  --select-height: 40px;
+
+  :global(.apart-select__placeholder) {
+    height: var(--select-font-size);
+    overflow: hidden;
+    line-height: 1;
+  }
+
+  @include respond-to(desktop-lg) {
+    --select-font-size: 15px;
+  }
+
+  @include respond-to(laptop) {
+    --select-font-size: 12px;
+  }
+
+  @include respond-to(tablet) {
+    --select-height: 43px;
+    width: 188px;
+  }
+
+  &:hover :global(.apart-select__control) .textAnimate,
+  &.active :global(.apart-select__control) .textAnimate {
+    transform: translateY(-100%);
+  }
+
+  @include respond-to(mobile) {
+    display: none;
+  }
+}
+
+.textAnimate {
+  position: relative;
+  display: block;
+  height: var(--select-font-size);
+  color: #ffffff;
+  font-size: var(--select-font-size);
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+
+  &::before {
+    content: 'выбрать квартиру';
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    color: #ffffff;
+    font-size: var(--select-font-size);
+  }
+}

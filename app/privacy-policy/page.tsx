@@ -1,0 +1,23 @@
+import styles from './PrivacyPolicy.module.scss'
+
+export const metadata = {
+  title: 'Политика обработки персональных данных | INCHAPIN_test',
+}
+
+export default function PrivacyPolicyPage() {
+  return (
+    <main className={styles.page}>
+      <article className={styles.content}>
+        <h1>Политика обработки персональных данных</h1>
+        <p>
+          Данные, отправленные через форму обратной связи, используются только
+          для обработки обращения и связи с пользователем.
+        </p>
+        <p>
+          Отправляя форму, пользователь соглашается на обработку указанных имени,
+          телефона и адреса электронной почты.
+        </p>
+      </article>
+    </main>
+  )
+}
