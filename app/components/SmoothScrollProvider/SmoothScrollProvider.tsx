@@ -24,15 +24,31 @@ export default function SmoothScrollProvider({
   const pathname = usePathname();
 
   useEffect(() => {
+    const setViewportHeight = () => {
+      document.documentElement.style.setProperty(
+        '--app-height',
+        `${window.innerHeight}px`,
+      );
+    };
+
     const media = window.matchMedia('(max-width: 767px)');
-    const handleChange = () => setUseNativeScroll(media.matches);
+    const handleChange = () => {
+      setUseNativeScroll(media.matches);
+      setViewportHeight();
+    };
 
     handleChange();
+    window.addEventListener('load', setViewportHeight);
+    window.addEventListener('resize', setViewportHeight);
+    window.addEventListener('orientationchange', setViewportHeight);
     media.addEventListener('change', handleChange);
     window.addEventListener('resize', handleChange);
     window.addEventListener('orientationchange', handleChange);
 
     return () => {
+      window.removeEventListener('load', setViewportHeight);
+      window.removeEventListener('resize', setViewportHeight);
+      window.removeEventListener('orientationchange', setViewportHeight);
       media.removeEventListener('change', handleChange);
       window.removeEventListener('resize', handleChange);
       window.removeEventListener('orientationchange', handleChange);
