@@ -12,17 +12,7 @@ const proximaNova = localFont({
       style: 'normal',
     },
     {
-      path: '../public/fonts/ProximaNova-Light.woff',
-      weight: '300',
-      style: 'normal',
-    },
-    {
       path: '../public/fonts/ProximaNova-Regular.woff2',
-      weight: '400',
-      style: 'normal',
-    },
-    {
-      path: '../public/fonts/ProximaNova-Regular.woff',
       weight: '400',
       style: 'normal',
     },
@@ -32,21 +22,12 @@ const proximaNova = localFont({
       style: 'normal',
     },
     {
-      path: '../public/fonts/ProximaNova-Semibold.woff',
-      weight: '600',
-      style: 'normal',
-    },
-    {
       path: '../public/fonts/ProximaNova-Bold.woff2',
       weight: '700',
       style: 'normal',
     },
-    {
-      path: '../public/fonts/ProximaNova-Bold.woff',
-      weight: '700',
-      style: 'normal',
-    },
   ],
+  preload: false,
   variable: '--font-proxima',
 })
 

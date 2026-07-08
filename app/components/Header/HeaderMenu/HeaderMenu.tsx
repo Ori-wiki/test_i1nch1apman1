@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { useEffect } from 'react'
-import { usePathname, useRouter } from 'next/navigation'
+import { usePathname } from 'next/navigation'
 import styles from './HeaderMenu.module.scss'
 
 interface HeaderMenuProps {
@@ -18,7 +18,6 @@ const navItems = [
 
 export const HeaderMenu = ({ isOpen, onClose }: HeaderMenuProps) => {
   const pathname = usePathname()
-  const router = useRouter()
 
   useEffect(() => {
     if (!isOpen) return
@@ -49,14 +48,28 @@ export const HeaderMenu = ({ isOpen, onClose }: HeaderMenuProps) => {
     onClose()
   }
 
-  const handleNavClick = (href: string, target: string) => {
-    if (pathname !== '/') {
-      onClose()
-      router.push(href)
+  const handleLinkClick = (
+    event: React.MouseEvent<HTMLAnchorElement>,
+    href: string,
+    target: string,
+  ) => {
+    if (pathname === '/') {
+      event.preventDefault()
+      if (href === '/') {
+        if (window.scrollbarInstance) {
+          window.scrollbarInstance.scrollTo(0, 0, 1000)
+        } else {
+          window.scrollTo({ top: 0, behavior: 'smooth' })
+        }
+        onClose()
+        return
+      }
+
+      scrollToSection(target)
       return
     }
 
-    scrollToSection(target)
+    onClose()
   }
 
   return (
@@ -80,14 +93,14 @@ export const HeaderMenu = ({ isOpen, onClose }: HeaderMenuProps) => {
 
         <nav className={styles.nav}>
           {navItems.map((item) => (
-            <button
+            <Link
               key={item.target}
-              type='button'
+              href={item.href}
               className={styles.navLink}
-              onClick={() => handleNavClick(item.href, item.target)}
+              onClick={(event) => handleLinkClick(event, item.href, item.target)}
             >
               {item.label}
-            </button>
+            </Link>
           ))}
 
           <Link

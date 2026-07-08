@@ -111,7 +111,6 @@
   color: var(--color-text-main);
   position: relative;
   display: block;
-  transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
 
   @include respond-to(desktop-lg) {
     font-size: 190px;
@@ -136,12 +135,15 @@
     content: var(--title-text);
     position: absolute;
     left: 0;
-    top: 100%;
+    top: 0;
     width: 100%;
     color: var(--color-text-accent);
     font-size: inherit;
     font-weight: inherit;
     line-height: inherit;
+    clip-path: inset(0 100% 0 0);
+    transition: clip-path 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: clip-path;
   }
 
   @include respond-to(tablet) {
@@ -154,7 +156,7 @@
 }
 
 .titleMask.scrolled {
-  .title {
-    transform: translateY(-100%);
+  .title::before {
+    clip-path: inset(0 0 0 0);
   }
 }

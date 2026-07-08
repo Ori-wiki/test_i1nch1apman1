@@ -9,7 +9,6 @@ export const Logo = () => (
       alt='Inchapin'
       width={187}
       height={30}
-      priority
     />
   </Link>
 )

@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import { usePathname } from 'next/navigation';
 import Scrollbar from 'smooth-scrollbar';
 import styles from './SmoothScrollProvider.module.scss';
 
@@ -20,6 +21,7 @@ export default function SmoothScrollProvider({
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const [useNativeScroll, setUseNativeScroll] = useState<boolean | null>(null);
+  const pathname = usePathname();
 
   useEffect(() => {
     const media = window.matchMedia('(max-width: 767px)');
@@ -113,6 +115,48 @@ export default function SmoothScrollProvider({
       }
     };
   }, [useNativeScroll]);
+
+  useEffect(() => {
+    if (useNativeScroll === null) return;
+
+    let timeoutId: ReturnType<typeof setTimeout> | undefined;
+
+    const scrollToHashTarget = (attempt = 0) => {
+      const hash = window.location.hash;
+      if (!hash) return;
+
+      const targetId = decodeURIComponent(hash.slice(1));
+      const element = document.getElementById(targetId);
+
+      if (!element) {
+        if (attempt < 20) {
+          timeoutId = setTimeout(() => scrollToHashTarget(attempt + 1), 80);
+        }
+        return;
+      }
+
+      const top = element.offsetTop;
+
+      if (window.scrollbarInstance) {
+        window.scrollbarInstance.update();
+        window.scrollbarInstance.scrollTo(0, top, 1000);
+      } else {
+        window.scrollTo({ top, behavior: 'smooth' });
+      }
+    };
+
+    const handleHashChange = () => {
+      scrollToHashTarget();
+    };
+
+    timeoutId = setTimeout(() => scrollToHashTarget(), 0);
+    window.addEventListener('hashchange', handleHashChange);
+
+    return () => {
+      if (timeoutId) clearTimeout(timeoutId);
+      window.removeEventListener('hashchange', handleHashChange);
+    };
+  }, [pathname, useNativeScroll]);
 
   return (
     <div

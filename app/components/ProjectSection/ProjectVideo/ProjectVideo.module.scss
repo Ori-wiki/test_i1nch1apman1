@@ -221,6 +221,44 @@
 
 .videoModalContent {
   background: #000;
+  animation: videoFadeIn 0.36s ease-out;
+}
+
+.videoCloseBtn {
+  top: 24px;
+  right: 24px;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.36);
+  backdrop-filter: blur(8px);
+
+  &::before,
+  &::after {
+    background-color: #fff;
+    height: 1.5px;
+  }
+
+  &:hover::before,
+  &:hover::after {
+    background-color: #fff;
+  }
+
+  &:focus-visible {
+    outline-color: #fff;
+  }
+
+  @include respond-to(tablet) {
+    top: 20px;
+    right: 20px;
+  }
+
+  @include respond-to(mobile) {
+    top: 16px;
+    right: 16px;
+    width: 48px;
+    height: 48px;
+  }
 }
 
 .modalVideoWrapper {
@@ -240,8 +278,13 @@
   max-width: 100vw;
   max-height: 100dvh;
   background: #000;
-  object-fit: contain;
+  object-fit: cover;
   cursor: default;
+  animation: videoFadeIn 0.36s ease-out;
+
+  @include respond-to(mobile) {
+    object-fit: contain;
+  }
 }
 
 @keyframes breathing {
@@ -254,5 +297,15 @@
   50% {
     transform: translate3d(-50%, -50%, 0) scale(1.16);
     opacity: 0.55;
+  }
+}
+
+@keyframes videoFadeIn {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
   }
 }

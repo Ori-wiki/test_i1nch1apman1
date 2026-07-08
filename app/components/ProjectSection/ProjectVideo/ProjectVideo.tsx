@@ -85,10 +85,17 @@ export const ProjectVideo = ({ videoUrl, posterUrl }: ProjectVideoProps) => {
         isOpen={isVideoOpen}
         onClose={() => setIsVideoOpen(false)}
         contentClassName={styles.videoModalContent}
+        closeButtonClassName={styles.videoCloseBtn}
         ariaLabel='Видео о проекте'
       >
         <div className={styles.modalVideoWrapper}>
-          <video src={videoUrl} controls autoPlay className={styles.modalVideo} />
+          <video
+            src={videoUrl}
+            controls
+            autoPlay
+            playsInline
+            className={styles.modalVideo}
+          />
         </div>
       </BaseModal>
     </div>

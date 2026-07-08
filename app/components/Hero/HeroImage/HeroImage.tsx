@@ -41,7 +41,14 @@ export const HeroImage = ({ src, alt }: { src: string; alt: string }) => {
   return (
     <div className={styles.imageWrapper}>
       <motion.div className={styles.parallaxLayer} style={{ y: springY }}>
-        <Image src={src} alt={alt} fill className={styles.bgImage} />
+        <Image
+          src={src}
+          alt={alt}
+          fill
+          priority
+          loading='eager'
+          className={styles.bgImage}
+        />
       </motion.div>
     </div>
   )

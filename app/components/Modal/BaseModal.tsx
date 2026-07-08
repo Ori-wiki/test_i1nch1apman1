@@ -9,6 +9,7 @@ interface BaseModalProps {
   children: React.ReactNode
   ariaLabel?: string
   contentClassName?: string
+  closeButtonClassName?: string
 }
 
 const focusableSelector = [
@@ -25,6 +26,7 @@ export const BaseModal = ({
   onClose,
   children,
   contentClassName,
+  closeButtonClassName,
   ariaLabel = 'Диалоговое окно',
 }: BaseModalProps) => {
   const nodeRef = useRef<HTMLDivElement>(null)
@@ -133,7 +135,7 @@ export const BaseModal = ({
           <button
             ref={closeButtonRef}
             type='button'
-            className={styles.closeBtn}
+            className={`${styles.closeBtn} ${closeButtonClassName ?? ''}`}
             onClick={onClose}
             aria-label='Закрыть модальное окно'
           />

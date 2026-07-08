@@ -1,53 +1,55 @@
-'use client'
+'use client';
 
-import styles from './HeroHeading.module.scss'
-import clsx from 'clsx'
-import { useEffect, useState } from 'react'
-import Scrollbar from 'smooth-scrollbar'
+import styles from './HeroHeading.module.scss';
+import clsx from 'clsx';
+import { useEffect, useState } from 'react';
+import Scrollbar from 'smooth-scrollbar';
 
 interface HeroHeadingProps {
-  subtitle: React.ReactNode
-  title: string
+  subtitle: React.ReactNode;
+  title: string;
 }
 
 export const HeroHeading = ({ subtitle, title }: HeroHeadingProps) => {
-  const [isScrolled, setIsScrolled] = useState(false)
+  const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
-    let scrollbar: Scrollbar | undefined
-    let timeoutId: ReturnType<typeof setTimeout> | undefined
+    let scrollbar: Scrollbar | undefined;
+    let timeoutId: ReturnType<typeof setTimeout> | undefined;
 
     const handleScrollEvent = (status: { offset: { y: number } }) => {
-      setIsScrolled(status.offset.y > 30)
-    }
+      setIsScrolled(status.offset.y > 30);
+    };
 
     const handleNativeScroll = () => {
-      setIsScrolled(window.scrollY > 30)
-    }
+      setIsScrolled(window.scrollY > 30);
+    };
 
     const checkScrollbar = () => {
-      scrollbar = window.scrollbarInstance
+      scrollbar = window.scrollbarInstance;
       if (scrollbar) {
-        scrollbar.addListener(handleScrollEvent)
-        handleScrollEvent(scrollbar)
+        scrollbar.addListener(handleScrollEvent);
+        handleScrollEvent(scrollbar);
       } else if (window.nativeScrollEnabled) {
-        handleNativeScroll()
-        window.addEventListener('scroll', handleNativeScroll, { passive: true })
+        handleNativeScroll();
+        window.addEventListener('scroll', handleNativeScroll, {
+          passive: true,
+        });
       } else {
-        timeoutId = setTimeout(checkScrollbar, 50)
+        timeoutId = setTimeout(checkScrollbar, 50);
       }
-    }
+    };
 
-    checkScrollbar()
+    checkScrollbar();
 
     return () => {
-      if (timeoutId) clearTimeout(timeoutId)
-      window.removeEventListener('scroll', handleNativeScroll)
+      if (timeoutId) clearTimeout(timeoutId);
+      window.removeEventListener('scroll', handleNativeScroll);
       if (scrollbar) {
-        scrollbar.removeListener(handleScrollEvent)
+        scrollbar.removeListener(handleScrollEvent);
       }
-    }
-  }, [])
+    };
+  }, []);
 
   return (
     <div className={styles.content}>
@@ -59,5 +61,5 @@ export const HeroHeading = ({ subtitle, title }: HeroHeadingProps) => {
         <h1 className={styles.title}>{title}</h1>
       </div>
     </div>
-  )
-}
+  );
+};
