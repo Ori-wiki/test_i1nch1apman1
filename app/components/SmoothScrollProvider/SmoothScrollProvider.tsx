@@ -39,18 +39,14 @@ export default function SmoothScrollProvider({
 
     handleChange();
     window.addEventListener('load', setViewportHeight);
-    window.addEventListener('resize', setViewportHeight);
     window.addEventListener('orientationchange', setViewportHeight);
     media.addEventListener('change', handleChange);
-    window.addEventListener('resize', handleChange);
     window.addEventListener('orientationchange', handleChange);
 
     return () => {
       window.removeEventListener('load', setViewportHeight);
-      window.removeEventListener('resize', setViewportHeight);
       window.removeEventListener('orientationchange', setViewportHeight);
       media.removeEventListener('change', handleChange);
-      window.removeEventListener('resize', handleChange);
       window.removeEventListener('orientationchange', handleChange);
     };
   }, []);
