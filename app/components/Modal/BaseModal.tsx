@@ -8,6 +8,7 @@ interface BaseModalProps {
   onClose: () => void
   children: React.ReactNode
   ariaLabel?: string
+  contentClassName?: string
 }
 
 const focusableSelector = [
@@ -23,6 +24,7 @@ export const BaseModal = ({
   isOpen,
   onClose,
   children,
+  contentClassName,
   ariaLabel = 'Диалоговое окно',
 }: BaseModalProps) => {
   const nodeRef = useRef<HTMLDivElement>(null)
@@ -123,7 +125,7 @@ export const BaseModal = ({
         aria-label={ariaLabel}
       >
         <div
-          className={styles.content}
+          className={`${styles.content} ${contentClassName ?? ''}`}
           onClick={(event) => event.stopPropagation()}
           ref={contentRef}
           tabIndex={-1}

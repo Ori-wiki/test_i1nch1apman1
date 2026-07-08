@@ -1,4 +1,4 @@
-@use '@/app/mixins.scss' as *;
+@use '@/app/breakpoints.scss' as *;
 
 .content {
   display: flex;
@@ -89,16 +89,16 @@
     height: 120px;
     margin-top: 18px;
     transform: none;
-    overflow: visible;
+    overflow: hidden;
   }
 
   @include respond-to(mobile) {
     container-type: inline-size;
     width: 100%;
     max-width: 100%;
-    height: max(64px, 20cqw);
+    height: max(72px, 20cqw);
     margin-top: 21px;
-    overflow: visible;
+    overflow: hidden;
   }
 }
 
@@ -145,32 +145,16 @@
   }
 
   @include respond-to(tablet) {
-    &::before {
-      content: none;
-    }
+    padding-bottom: 0.12em;
   }
 
   @include respond-to(mobile) {
-    &::before {
-      content: none;
-    }
+    padding-bottom: 0.12em;
   }
 }
 
 .titleMask.scrolled {
   .title {
     transform: translateY(-100%);
-  }
-
-  @include respond-to(tablet) {
-    .title {
-      transform: none;
-    }
-  }
-
-  @include respond-to(mobile) {
-    .title {
-      transform: none;
-    }
   }
 }

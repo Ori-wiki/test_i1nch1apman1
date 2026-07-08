@@ -1,125 +1,127 @@
-'use client'
+'use client';
 
-import { useEffect, useRef, useState } from 'react'
-import Scrollbar from 'smooth-scrollbar'
-import styles from './SmoothScrollProvider.module.scss'
+import { useEffect, useRef, useState } from 'react';
+import Scrollbar from 'smooth-scrollbar';
+import styles from './SmoothScrollProvider.module.scss';
 
 declare global {
   interface Window {
-    scrollbarInstance?: Scrollbar
-    nativeScrollContainer?: HTMLDivElement
-    nativeScrollEnabled?: boolean
+    scrollbarInstance?: Scrollbar;
+    nativeScrollContainer?: HTMLDivElement;
+    nativeScrollEnabled?: boolean;
   }
 }
 
 export default function SmoothScrollProvider({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
-  const scrollContainerRef = useRef<HTMLDivElement>(null)
-  const [useNativeScroll, setUseNativeScroll] = useState<boolean | null>(null)
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
+  const [useNativeScroll, setUseNativeScroll] = useState<boolean | null>(null);
 
   useEffect(() => {
-    const media = window.matchMedia('(max-width: 767px)')
-    const handleChange = () => setUseNativeScroll(media.matches)
+    const media = window.matchMedia('(max-width: 767px)');
+    const handleChange = () => setUseNativeScroll(media.matches);
 
-    handleChange()
-    media.addEventListener('change', handleChange)
-    window.addEventListener('resize', handleChange)
-    window.addEventListener('orientationchange', handleChange)
+    handleChange();
+    media.addEventListener('change', handleChange);
+    window.addEventListener('resize', handleChange);
+    window.addEventListener('orientationchange', handleChange);
 
     return () => {
-      media.removeEventListener('change', handleChange)
-      window.removeEventListener('resize', handleChange)
-      window.removeEventListener('orientationchange', handleChange)
-    }
-  }, [])
+      media.removeEventListener('change', handleChange);
+      window.removeEventListener('resize', handleChange);
+      window.removeEventListener('orientationchange', handleChange);
+    };
+  }, []);
 
   useEffect(() => {
-    if (useNativeScroll === null) return
+    if (useNativeScroll === null) return;
 
     if (useNativeScroll) {
-      window.nativeScrollEnabled = true
-      window.nativeScrollContainer = undefined
-      window.scrollbarInstance = undefined
+      window.nativeScrollEnabled = true;
+      window.nativeScrollContainer = undefined;
+      window.scrollbarInstance = undefined;
 
-      const container = scrollContainerRef.current
+      const container = scrollContainerRef.current;
       if (!container) {
         return () => {
-          window.nativeScrollEnabled = undefined
-          window.nativeScrollContainer = undefined
-        }
+          window.nativeScrollEnabled = undefined;
+          window.nativeScrollContainer = undefined;
+        };
       }
 
-      const existingScrollbar = Scrollbar.get(container)
+      const existingScrollbar = Scrollbar.get(container);
 
       if (existingScrollbar) {
-        existingScrollbar.destroy()
+        existingScrollbar.destroy();
       }
 
       return () => {
-        window.nativeScrollEnabled = undefined
-        window.nativeScrollContainer = undefined
-      }
+        window.nativeScrollEnabled = undefined;
+        window.nativeScrollContainer = undefined;
+      };
     }
 
-    const container = scrollContainerRef.current
-    if (!container) return
+    const container = scrollContainerRef.current;
+    if (!container) return;
 
-    window.nativeScrollEnabled = false
+    window.nativeScrollEnabled = false;
 
     const scrollbar = Scrollbar.init(container, {
-      damping: 0.01,
+      damping: 0.025,
       alwaysShowTracks: false,
+      continuousScrolling: false,
       delegateTo: document,
-    })
+      renderByPixels: true,
+      thumbMinSize: 48,
+    });
 
-    window.scrollbarInstance = scrollbar
+    window.scrollbarInstance = scrollbar;
 
     const updateScrollbar = () => {
       requestAnimationFrame(() => {
-        scrollbar.update()
-      })
-    }
+        scrollbar.update();
+      });
+    };
 
-    const resizeObserver = new ResizeObserver(updateScrollbar)
-    resizeObserver.observe(container)
+    const resizeObserver = new ResizeObserver(updateScrollbar);
+    resizeObserver.observe(container);
 
-    const contentEl = container.querySelector('.scroll-content')
+    const contentEl = contentRef.current;
     if (contentEl) {
-      resizeObserver.observe(contentEl)
+      resizeObserver.observe(contentEl);
     }
 
-    window.addEventListener('load', updateScrollbar)
-    window.addEventListener('resize', updateScrollbar)
-    window.addEventListener('orientationchange', updateScrollbar)
+    window.addEventListener('load', updateScrollbar);
+    window.addEventListener('resize', updateScrollbar);
+    window.addEventListener('orientationchange', updateScrollbar);
 
-    updateScrollbar()
+    updateScrollbar();
 
     return () => {
-      resizeObserver.disconnect()
-      window.removeEventListener('load', updateScrollbar)
-      window.removeEventListener('resize', updateScrollbar)
-      window.removeEventListener('orientationchange', updateScrollbar)
+      resizeObserver.disconnect();
+      window.removeEventListener('load', updateScrollbar);
+      window.removeEventListener('resize', updateScrollbar);
+      window.removeEventListener('orientationchange', updateScrollbar);
 
       if (Scrollbar.get(container)) {
-        Scrollbar.destroy(container)
-        window.scrollbarInstance = undefined
+        Scrollbar.destroy(container);
+        window.scrollbarInstance = undefined;
       }
-    }
-  }, [useNativeScroll])
-
-  if (useNativeScroll) {
-    return <>{children}</>
-  }
+    };
+  }, [useNativeScroll]);
 
   return (
     <div
       ref={scrollContainerRef}
-      className={styles.viewport}
+      className={`${styles.viewport} ${useNativeScroll ? styles.nativeViewport : ''}`}
     >
-      {children}
+      <div ref={contentRef} className={styles.content}>
+        {children}
+      </div>
     </div>
-  )
+  );
 }

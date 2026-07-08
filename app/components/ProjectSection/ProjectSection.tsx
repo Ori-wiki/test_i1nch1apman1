@@ -22,7 +22,7 @@ const projectDescription = (
 
 export const ProjectSection = () => {
   return (
-    <section className={styles.section}>
+    <section className={styles.section} id='project'>
       <div className={styles.container}>
         <div className={styles.content}>
           <ProjectImage

@@ -1,32 +1,29 @@
-'use client'
+'use client';
 
-import React, { useState } from 'react'
-import { useForm, SubmitHandler } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { z } from 'zod'
-import { FloatingInput } from './FloatingInput/FloatingInput'
-import { FormSubmitButton } from './FormSubmitButton/FormSubmitButton'
-import styles from './ContactForm.module.scss'
+import React, { useState } from 'react';
+import { useForm, SubmitHandler } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { z } from 'zod';
+import { FloatingInput } from './FloatingInput/FloatingInput';
+import { FormSubmitButton } from './FormSubmitButton/FormSubmitButton';
+import styles from './ContactForm.module.scss';
 
 const schema = z.object({
   name: z.string().min(2, 'Имя должно содержать минимум 2 символа'),
   phone: z.string().refine(
     (val) => {
-      const digits = val.replace(/\D/g, '')
-      return digits.length === 11
+      const digits = val.replace(/\D/g, '');
+      return digits.length === 11;
     },
     { message: 'Введите полный номер телефона' },
   ),
-  email: z
-    .string()
-    .min(1, 'Введите email')
-    .email('Некорректный формат email'),
-})
+  email: z.string().min(1, 'Введите email').email('Некорректный формат email'),
+});
 
-type FormValues = z.infer<typeof schema>
+type FormValues = z.infer<typeof schema>;
 
 export const ContactForm = () => {
-  const [isSubmitted, setIsSubmitted] = useState(false)
+  const [isSubmitted, setIsSubmitted] = useState(false);
   const {
     control,
     handleSubmit,
@@ -36,19 +33,19 @@ export const ContactForm = () => {
     mode: 'onSubmit',
     reValidateMode: 'onChange',
     defaultValues: { name: '', phone: '', email: '' },
-  })
+  });
 
   const onSubmit: SubmitHandler<FormValues> = (data) => {
-    console.log('Данные формы:', data)
-    setIsSubmitted(true)
-  }
+    console.log('Данные формы:', data);
+    setIsSubmitted(true);
+  };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={styles.formContainer}>
       {isSubmitted ? (
         <div className={styles.successMessage}>
-          <h2>Спасибо за заказ!</h2>
-          <p>Мы свяжемся с вами в ближайшее время.</p>
+          <h2>Заявка отправлена</h2>
+          <p>Наш менеджер скоро свяжется с вами.</p>
         </div>
       ) : (
         <>
@@ -86,5 +83,5 @@ export const ContactForm = () => {
         </>
       )}
     </form>
-  )
-}
+  );
+};

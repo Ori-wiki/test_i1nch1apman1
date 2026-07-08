@@ -41,7 +41,7 @@ export const ProjectVideo = ({ videoUrl, posterUrl }: ProjectVideoProps) => {
   }
 
   return (
-    <div className={styles.wrapper}>
+    <div className={styles.wrapper} id='project-video'>
       <video
         ref={videoRef}
         src={videoUrl}
@@ -84,9 +84,12 @@ export const ProjectVideo = ({ videoUrl, posterUrl }: ProjectVideoProps) => {
       <BaseModal
         isOpen={isVideoOpen}
         onClose={() => setIsVideoOpen(false)}
+        contentClassName={styles.videoModalContent}
         ariaLabel='Видео о проекте'
       >
-        <video src={videoUrl} controls autoPlay className={styles.modalVideo} />
+        <div className={styles.modalVideoWrapper}>
+          <video src={videoUrl} controls autoPlay className={styles.modalVideo} />
+        </div>
       </BaseModal>
     </div>
   )

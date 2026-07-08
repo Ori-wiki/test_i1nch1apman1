@@ -54,11 +54,11 @@ export const metadata: Metadata = {
   title: 'INCHAPIN | Дом бизнес-класса',
   description: 'Демо-страница жилого комплекса',
   icons: {
-    icon: '/blue-favicon.ico',
-    shortcut: '/favicon-96x96.png',
-    apple: '/apple-touch-icon.png',
+    icon: '/favicons/favicon.ico',
+    shortcut: '/favicons/favicon-96x96.png',
+    apple: '/favicons/apple-touch-icon.png',
   },
-  manifest: '/site.webmanifest',
+  manifest: '/favicons/site.webmanifest',
 }
 
 export const viewport: Viewport = {

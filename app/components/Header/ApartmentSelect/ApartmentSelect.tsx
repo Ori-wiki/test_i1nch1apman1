@@ -55,6 +55,11 @@ export const ApartmentSelect = ({ options }: ApartmentSelectProps) => {
       fontSize: 'var(--select-font-size)',
       fontWeight: 600,
     }),
+    valueContainer: (provided) => ({
+      ...provided,
+      padding: '0 6px',
+      overflow: 'visible',
+    }),
     indicatorSeparator: () => ({ display: 'none' }),
     dropdownIndicator: (provided, state) => ({
       ...provided,

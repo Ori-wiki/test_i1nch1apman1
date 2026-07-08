@@ -1,4 +1,4 @@
-@use '@/app/mixins.scss' as *;
+@use '@/app/breakpoints.scss' as *;
 
 .overlay {
   position: fixed;
@@ -46,7 +46,7 @@
 }
 
 .closeBtn {
-  background: none;
+  background: transparent;
   border: none;
   outline: none;
   width: 44px;
@@ -55,11 +55,10 @@
   top: 60px;
   right: 60px;
   z-index: 20;
-  transition: 0.5s all;
-  transform: rotate(0deg);
   cursor: pointer;
   pointer-events: auto;
   touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
 
   @include respond-to(tablet) {
     top: 50px;
@@ -71,18 +70,24 @@
     right: 25px;
   }
 
-  &:hover {
-    transform: rotate(90deg);
+  &:hover::before {
+    transform: translate(-50%, -50%) rotate(45deg) scaleX(1.25);
+    background-color: var(--color-text-accent);
+  }
 
-    &::after,
-    &::before {
-      background-color: var(--color-text-accent);
-    }
+  &:hover::after {
+    transform: translate(-50%, -50%) rotate(-45deg) scaleX(1.25);
+    background-color: var(--color-text-accent);
   }
 
   &:focus-visible {
     outline: 2px solid var(--color-text-accent);
     outline-offset: 8px;
+  }
+
+  &:active,
+  &:focus {
+    background: transparent;
   }
 }
 
@@ -95,7 +100,9 @@
   top: 50%;
   transform: translate(-50%, -50%) rotate(-45deg);
   background-color: var(--color-text-main);
-  transition: 0.5s all;
+  transition:
+    background-color 0.3s ease,
+    transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .closeBtn:before {
@@ -107,5 +114,7 @@
   top: 50%;
   transform: translate(-50%, -50%) rotate(45deg);
   background-color: var(--color-text-main);
-  transition: 0.5s all;
+  transition:
+    background-color 0.3s ease,
+    transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
 }

@@ -15,9 +15,14 @@ export const HeroHeading = ({ subtitle, title }: HeroHeadingProps) => {
 
   useEffect(() => {
     let scrollbar: Scrollbar | undefined
+    let timeoutId: ReturnType<typeof setTimeout> | undefined
 
     const handleScrollEvent = (status: { offset: { y: number } }) => {
       setIsScrolled(status.offset.y > 30)
+    }
+
+    const handleNativeScroll = () => {
+      setIsScrolled(window.scrollY > 30)
     }
 
     const checkScrollbar = () => {
@@ -26,15 +31,18 @@ export const HeroHeading = ({ subtitle, title }: HeroHeadingProps) => {
         scrollbar.addListener(handleScrollEvent)
         handleScrollEvent(scrollbar)
       } else if (window.nativeScrollEnabled) {
-        setIsScrolled(false)
+        handleNativeScroll()
+        window.addEventListener('scroll', handleNativeScroll, { passive: true })
       } else {
-        setTimeout(checkScrollbar, 50)
+        timeoutId = setTimeout(checkScrollbar, 50)
       }
     }
 
     checkScrollbar()
 
     return () => {
+      if (timeoutId) clearTimeout(timeoutId)
+      window.removeEventListener('scroll', handleNativeScroll)
       if (scrollbar) {
         scrollbar.removeListener(handleScrollEvent)
       }
