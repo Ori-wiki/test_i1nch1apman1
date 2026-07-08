@@ -44,6 +44,18 @@ select {
   font-family: inherit;
 }
 
+@media (hover: none) and (pointer: coarse) {
+  button,
+  a,
+  [role='button'],
+  input,
+  textarea,
+  select,
+  summary {
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
 .scroll-content {
   display: flex;
   flex-direction: column;

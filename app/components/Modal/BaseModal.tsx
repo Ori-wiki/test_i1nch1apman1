@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import { useCallback, useEffect, useRef } from 'react'
 import { createPortal } from 'react-dom'
 import { CSSTransition } from 'react-transition-group'
 import styles from './BaseModal.module.scss'
@@ -33,6 +33,19 @@ export const BaseModal = ({
   const contentRef = useRef<HTMLDivElement>(null)
   const closeButtonRef = useRef<HTMLButtonElement>(null)
   const previouslyFocusedRef = useRef<HTMLElement | null>(null)
+  const modalHistoryKeyRef = useRef(`modal-${Date.now()}-${Math.random()}`)
+  const hasHistoryEntryRef = useRef(false)
+  const isClosingFromHistoryRef = useRef(false)
+
+  const requestClose = useCallback(() => {
+    if (hasHistoryEntryRef.current && !isClosingFromHistoryRef.current) {
+      isClosingFromHistoryRef.current = true
+      window.history.back()
+      return
+    }
+
+    onClose()
+  }, [onClose])
 
   useEffect(() => {
     if (!isOpen) return
@@ -49,10 +62,29 @@ export const BaseModal = ({
       event.stopPropagation()
     }
 
+    const historyState = window.history.state ?? {}
+    window.history.pushState(
+      {
+        ...historyState,
+        __modalKey: modalHistoryKeyRef.current,
+      },
+      '',
+    )
+    hasHistoryEntryRef.current = true
+    isClosingFromHistoryRef.current = false
+
+    const handlePopState = () => {
+      if (!hasHistoryEntryRef.current) return
+
+      hasHistoryEntryRef.current = false
+      isClosingFromHistoryRef.current = false
+      onClose()
+    }
+
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
         event.preventDefault()
-        onClose()
+        requestClose()
         return
       }
 
@@ -80,6 +112,7 @@ export const BaseModal = ({
       }
     }
 
+    window.addEventListener('popstate', handlePopState)
     window.addEventListener('keydown', handleKeyDown)
     document.addEventListener('wheel', stopBackgroundScroll, {
       capture: true,
@@ -91,11 +124,19 @@ export const BaseModal = ({
     })
 
     return () => {
+      window.removeEventListener('popstate', handlePopState)
       window.removeEventListener('keydown', handleKeyDown)
       document.removeEventListener('wheel', stopBackgroundScroll, true)
       document.removeEventListener('touchmove', stopBackgroundScroll, true)
     }
-  }, [isOpen, onClose])
+  }, [isOpen, onClose, requestClose])
+
+  useEffect(() => {
+    if (isOpen) return
+
+    hasHistoryEntryRef.current = false
+    isClosingFromHistoryRef.current = false
+  }, [isOpen])
 
   if (typeof document === 'undefined') return null
 
@@ -120,7 +161,7 @@ export const BaseModal = ({
     >
       <div
         className={styles.overlay}
-        onClick={onClose}
+        onClick={requestClose}
         ref={nodeRef}
         role='dialog'
         aria-modal='true'
@@ -136,7 +177,7 @@ export const BaseModal = ({
             ref={closeButtonRef}
             type='button'
             className={`${styles.closeBtn} ${closeButtonClassName ?? ''}`}
-            onClick={onClose}
+            onClick={requestClose}
             aria-label='Закрыть модальное окно'
           />
           {children}

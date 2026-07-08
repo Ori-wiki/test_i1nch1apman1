@@ -1,12 +1,13 @@
 'use client'
 
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import Image from 'next/image'
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion'
 import styles from './HeroImage.module.scss'
 
 export const HeroImage = ({ src, alt }: { src: string; alt: string }) => {
   const scrollY = useMotionValue(0)
+  const [isMobileNativeScroll, setIsMobileNativeScroll] = useState(false)
 
   useEffect(() => {
     const handleScroll = (status: { offset: { y: number } }) => {
@@ -16,9 +17,11 @@ export const HeroImage = ({ src, alt }: { src: string; alt: string }) => {
     const checkScrollbar = () => {
       const scrollbar = window.scrollbarInstance
       if (scrollbar) {
+        setIsMobileNativeScroll(false)
         scrollY.set(scrollbar.offset.y)
         scrollbar.addListener(handleScroll)
       } else if (window.nativeScrollEnabled) {
+        setIsMobileNativeScroll(true)
         scrollY.set(0)
       } else {
         setTimeout(checkScrollbar, 50)
@@ -40,7 +43,10 @@ export const HeroImage = ({ src, alt }: { src: string; alt: string }) => {
 
   return (
     <div className={styles.imageWrapper}>
-      <motion.div className={styles.parallaxLayer} style={{ y: springY }}>
+      <motion.div
+        className={`${styles.parallaxLayer} ${isMobileNativeScroll ? styles.staticLayer : ''}`}
+        style={isMobileNativeScroll ? undefined : { y: springY }}
+      >
         <Image
           src={src}
           alt={alt}
