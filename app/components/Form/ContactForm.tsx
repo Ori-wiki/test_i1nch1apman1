@@ -17,10 +17,7 @@ const schema = z.object({
     },
     { message: 'Введите полный номер телефона' },
   ),
-  email: z
-    .string()
-    .min(1, 'Введите email')
-    .email('Некорректный формат email'),
+  email: z.string().min(1, 'Введите email').email('Некорректный формат email'),
 });
 
 type FormValues = z.infer<typeof schema>;
@@ -55,7 +52,7 @@ export const ContactForm = () => {
           <h2 className={styles.title}>Заказать звонок</h2>
 
           <FloatingInput
-            label='Имя'
+            label='Ваше имя'
             name='name'
             control={control}
             error={errors.name}
